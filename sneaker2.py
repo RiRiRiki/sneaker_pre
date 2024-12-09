@@ -6,7 +6,7 @@ from datetime import datetime
 # モデルの読み込み
 model = joblib.load("sneaker_price_model.pkl")
 
-# カスタムCSSでデザインを変更
+# カスタムCSSでデザインを改善
 st.markdown(
     """
     <style>
@@ -45,9 +45,10 @@ st.write("""
 # 注意書き
 st.info("⚠️ 注意: モデルはまだ発展途上であり、データが不足しているため精度に限界があります。予測結果を参考にしつつ、実際の市場情報も確認してください。")
 
-# サイドバーに入力フォームを表示
-st.sidebar.header("スニーカー情報の入力")
+# サイドバー案内メッセージ
+st.sidebar.header("👉 ここをクリックしてスニーカー情報を入力！")
 
+# サイドバーに入力フォームを表示
 model_name = st.sidebar.selectbox("モデル名", ["dunk sb", "AJ1low", "AJ1HIGH", "AJ3", "AJ4", "AJ11"])
 color = st.sidebar.selectbox("カラー", ["gray", "green", "blue", "black", "white", "red", "yellow", "brown"])
 price = st.sidebar.number_input("定価 (円)", min_value=0, step=500)
@@ -66,6 +67,9 @@ input_data = pd.DataFrame({
     "weekday": [weekday],
     "コラボ": [collaboration]
 })
+
+# メイン画面に案内メッセージを追加
+st.write("💡 左側のサイドバーからスニーカー情報を入力してください。")
 
 # 予測ボタン
 if st.sidebar.button("予測する"):
